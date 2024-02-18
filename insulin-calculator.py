@@ -18,10 +18,10 @@ def round_numbers(value):
 
 def get_state():
     while True:
-        print('\nVeuillez choisir parmi les trois situations au diagnostic suivantes (1,2 ou 3):')
-        print('1. Acidose (1u/kg/jour)')
-        print('2. Hyperglycémie + cétone (0,8u/kg/jr)')
-        print('3. Hyperglycémie sans cétone (0,6u/kg/jr)\n')
+        print('\nChoisir une des trois situations suivantes (1, 2 ou 3):')
+        print('1. Acidose (1 u / kg / jour)')
+        print('2. Hyperglycémie + cétone (0,8 u / kg / jr)')
+        print('3. Hyperglycémie sans cétone (0,6 u / kg / jr)\n')
         state = input('Choix: ')
 
         if state == '1':
@@ -36,7 +36,7 @@ def get_state():
 
 def get_weight():
     while True:
-        input_weight = input('\nVeuillez entrez le poids du patient en kg avec un point (exemple: xx.xx): ')
+        input_weight = input('\nVeuillez entrer le poids du patient en kg avec un point si il y a des décimales (exemple: xx.xx): ')
 
         try:
             weight = float(input_weight)
@@ -50,7 +50,7 @@ def get_weight():
 
 def get_injections():
     while True:
-        print('\nVeuillez choisir parmi les deux types de régime suivants (3 ou 4):')
+        print('\nChoisir le type de régime (3 ou 4):')
         print('- 3 injections')
         print('- 4 injections\n')
         choice = input('Choix: ')
@@ -156,10 +156,10 @@ def print_basal_value(DTQ, injectionType):
     if injectionType == 3:
         NPH_Dej = round_numbers((DTQ * (2 / 3)) * (2 / 3))
         NPH_HS = round_numbers((DTQ * (1 / 3)) * (1 / 2))
-        print(f'NPH Déjeuner: {NPH_Dej} u')
-        print(f'NPH HS: {NPH_HS} u')
+        print(f'NPH Déjeuner: {NPH_Dej} U')
+        print(f'NPH HS: {NPH_HS} U')
     elif injectionType == 4:
-        basale = 0.4 * DTQ
+        basale = round_numbers(0.4 * DTQ)
         print(f'Basale (HS): {basale} u')
 
 
