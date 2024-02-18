@@ -1,9 +1,19 @@
+import math
+
 # Constants
 ACIDOSE_DOSE = 0.1
 HYPERGLYCEMIE_CETONE_DOSE = 0.8
 HYPERGLYCEMIE_SANS_CETONE_DOSE = 0.6
 INJECTION_3 = 3
 INJECTION_4 = 4
+
+
+def round_numbers(value):
+    x = math.floor(value)
+    if (value - x) < .50:
+        return x
+    else:
+        return math.ceil(value)
 
 
 def get_state():
@@ -58,37 +68,38 @@ def summary(state, weight, injections):
 
 
 def get_DTQ(regime, poids):
-    print(f'DTQ: {round(regime * poids)} u/jr')
-    return round(regime * poids)
+    print(f'DTQ: {round_numbers(regime * poids)} u/jr')
+    return round_numbers(regime * poids)
 
 
 def get_standard_doses_per_meal(DTQ, injectionType):
     if injectionType == 3:
-        UR_Dejeuner = round((DTQ * (2 / 3)) * (1 / 3))
-        UR_Souper = round((DTQ * (1 / 3)) * (1 / 2))
+        UR_Dejeuner = round_numbers((DTQ * (2 / 3)) * (1 / 3))
+        UR_Souper = round_numbers((DTQ * (1 / 3)) * (1 / 2))
         return UR_Dejeuner, UR_Souper
     if injectionType == 4:
-        return round((0.6 * DTQ) / 3)
+        return round_numbers((0.6 * DTQ) / 3)
     return None
 
 
 def get_sensibility(DTQ):
-    return round(100 / DTQ)
+    return round_numbers(100 / DTQ)
 
 
 def get_correction(interval, se, ng):
-    return round((interval - ng) / se)
+    return round_numbers((interval - ng) / se)
 
 
 def hs_correction(interval, se, sd):
-    if round((interval - sd) / se) < 0:
+    if round_numbers((interval - sd) / se) < 0:
         return 0
-    return round((interval - sd) / se)
+    return round_numbers((interval - sd) / se)
 
 
 def print_rapid_table(DTQ, injectionType):
     sensibility = get_sensibility(DTQ)
     glycemie_normale = 5
+    glycemie_normale2 = 7
     interval1 = 8
     interval2 = 12
     interval3 = 17
@@ -101,8 +112,8 @@ def print_rapid_table(DTQ, injectionType):
         thirdRow_souper = sd_souper + get_correction(interval1, sensibility, glycemie_normale)
         fourthRow_souper = sd_souper + get_correction(interval2, sensibility, glycemie_normale)
         fifthRow_souper = sd_souper + get_correction(interval3, sensibility, glycemie_normale)
-        fourthRowHS = hs_correction(interval2, sensibility, sd_souper)
-        fifthRowHS = hs_correction(interval3, sensibility, sd_souper)
+        fourthRowHS = hs_correction(interval2, sensibility, glycemie_normale2)
+        fifthRowHS = hs_correction(interval3, sensibility, glycemie_normale2)
 
         belowSd_dej = sd_dej - get_correction(interval1, sensibility, glycemie_normale)
         belowSd_souper = sd_souper - get_correction(interval1, sensibility, glycemie_normale)
@@ -123,8 +134,8 @@ def print_rapid_table(DTQ, injectionType):
         thirdRow = sd + get_correction(interval1, sensibility, glycemie_normale)
         fourthRow = sd + get_correction(interval2, sensibility, glycemie_normale)
         fifthRow = sd + get_correction(interval3, sensibility, glycemie_normale)
-        fourthRowHS = hs_correction(interval2, sensibility, sd)
-        fifthRowHS = hs_correction(interval3, sensibility, sd)
+        fourthRowHS = hs_correction(interval2, sensibility, glycemie_normale2)
+        fifthRowHS = hs_correction(interval3, sensibility, glycemie_normale2)
         belowSd = sd - get_correction(interval1, sensibility, glycemie_normale)
 
         print(f'|---------------- Rapid (UR) Table -- Sensibilité: {sensibility} ----------------|')
@@ -143,8 +154,8 @@ def print_rapid_table(DTQ, injectionType):
 
 def print_basal_value(DTQ, injectionType):
     if injectionType == 3:
-        NPH_Dej = round((DTQ * (2 / 3)) * (2 / 3))
-        NPH_HS = round((DTQ * (1 / 3)) * (1 / 2))
+        NPH_Dej = round_numbers((DTQ * (2 / 3)) * (2 / 3))
+        NPH_HS = round_numbers((DTQ * (1 / 3)) * (1 / 2))
         print(f'NPH Déjeuner: {NPH_Dej} u')
         print(f'NPH HS: {NPH_HS} u')
     elif injectionType == 4:
