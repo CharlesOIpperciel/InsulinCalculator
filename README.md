@@ -1,7 +1,7 @@
 # Insuline Calculator
 
 ## Introduction
-<p align="justify"> This Python script is an insulin calculator designed to assist in determining insulin dosage for diabetic patients based on their condition, weight, and prescribed injection regimen. It provides a summary of the patient's condition, calculates the insulin dosage, and generates a rapid table for reference. A Javascript equivalent is available on my website @CharlesOIpperciel.github.io for demonstration purposes.</p>
+<p align="justify"> This Python script is an insulin calculator designed to assist in determining insulin dosage for diabetic patients based on their condition, weight, and prescribed injection regimen. It provides a summary of the patient's condition, calculates the insulin dosage, and generates a rapid table for reference. A version was deployed with Firebase, check it out using this link https://insulin-calculator-3fc5c.web.app/.</p>
 
 ## Disclaimer
 This tool was developed to help pediatric residents at Fleurimont Hospital in Sherbrooke, Québec, Canada to calculate the insulin dosages for diabetic patients.
