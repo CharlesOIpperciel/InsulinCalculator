@@ -13,5 +13,5 @@ This tool was developed to help pediatric residents at Fleurimont Hospital in Sh
 - Provides basal insulin values for injection regimens with 3 or 4 injections per day.
 
 ## Contact
-For questions, please contact: ippc2001@usherbrooke.ca
+For questions, please contact: charlesolivieripperciel@gmail.com
 
